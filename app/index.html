@@ -22,6 +22,15 @@
           <button class="button is-primary">Add GIF</button>
         </p>
       </form>
+
+      <h1>My Cool Gifs</h1>
+      <ul class="cool-gifs">
+        <li ng-repeat="gif in gifs">
+          <h3>{{ gif.name }}</h3>
+          <button ng-click="deleteMe(gif)">Delete It!</button>
+          <img src="{{ gif.url }}" />
+        </li>
+      </ul>
     </div>
     <script src="js/bundle.js"></script>
   </body>

@@ -13,14 +13,23 @@ function GifController ($scope, $http) {
 
   init();
 
+  $scope.validateName = function (name) {
+    if (name === '') {
+      $scope.errors.name = "You have to supply a name."
+    };
+  };
+
   $scope.validateUrl = function (url) {
     if (!url.startsWith('http')) {
       $scope.errors.url = "Must be a valid URL starting with http or https."
+      return false;
     }
 
     if (url === '') {
       $scope.errors.url = '';
     }
+
+    return true;
   };
 
   $scope.addGif = function (gif) {

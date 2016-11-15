@@ -6,10 +6,18 @@ function GifController ($scope, $http) {
   function init () {
     $http.get(SERVER_URL).then(function (resp) {
       console.log(resp.data);
+      $scope.gifs = resp.data;
     });
   };
 
   init();
+
+  $scope.addGif = function (gif) {
+    $http.post(SERVER_URL, gif).then(function (resp) {
+      let gif = resp.data;
+      $scope.gifs.push(gif);
+    });
+  };
 
 };
 

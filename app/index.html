@@ -9,6 +9,19 @@
   </head>
   <body ng-app="app">
     <div class="container" ng-controller="GifController">
+      <form ng-submit="addGif(gif)">
+        <label class="label">Name</label>
+        <p class="control">
+          <input class="input" type="text" ng-model="gif.name" />
+        </p>
+        <label class="label">Gif URL</label>
+        <p class="control">
+          <input class="input" type="text" ng-model="gif.url" />
+        </p>
+        <p class="control">
+          <button class="button is-primary">Add GIF</button>
+        </p>
+      </form>
     </div>
     <script src="js/bundle.js"></script>
   </body>

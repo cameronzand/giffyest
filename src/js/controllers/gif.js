@@ -2,6 +2,7 @@ const SERVER_URL = 'https://class-server.herokuapp.com/collections/brits-cool-gi
 
 function GifController ($scope, $http) {
   $scope.gifs = [];
+  $scope.errors = {};
 
   function init () {
     $http.get(SERVER_URL).then(function (resp) {
@@ -12,12 +13,24 @@ function GifController ($scope, $http) {
 
   init();
 
+  $scope.validateUrl = function (url) {
+    if (!url.startsWith('http')) {
+      $scope.errors.url = "Must be a valid URL starting with http or https."
+    }
+
+    if (url === '') {
+      $scope.errors.url = '';
+    }
+  };
+
   $scope.addGif = function (gif) {
-    $http.post(SERVER_URL, gif).then(function (resp) {
-      let gif = resp.data;
-      $scope.gifs.push(gif);
-      console.log($scope.gifs);
-    });
+    if ($scope.validateUrl(gif.url)) {
+      $http.post(SERVER_URL, gif).then(function (resp) {
+        let gif = resp.data;
+        $scope.gifs.push(gif);
+        console.log($scope.gifs);
+      });
+    }
   };
 
   $scope.deleteMe = function (gif) {
